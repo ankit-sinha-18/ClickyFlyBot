@@ -37,6 +37,7 @@ async def start(bot, message):
 
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
+    try:
         link = message.matches[0].group(0)
         short_link = await get_shortlink(link)
         await message.reply(
@@ -50,7 +51,7 @@ async def link_handler(bot, message):
             ),
             quote=True
         )
-        except Exception as e:
+     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 
 
